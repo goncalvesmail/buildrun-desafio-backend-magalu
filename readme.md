@@ -1,5 +1,5 @@
 <p align="center" width="100%">
-    <img width="50%" src="https://github.com/buildrun-tech/buildrun-desafio-backend-magalu/blob/main/images/logo-magalu.png"> 
+    <img width="50%" src="https://github.com/buildrun-tech/buildrun-desafio-backend-magalu/blob/main/images/logo-magalu.png" alt=""> 
 </p>
 
 
@@ -15,18 +15,10 @@
 
 </p>
 
-[Se inscreva em nosso canal no Youtube!](https://www.youtube.com/@buildrun-tech?sub_confirmation=1)
-
-Para um maior entendimento do código deste repositório, [assista nosso vídeo no Youtube, clique aqui.](https://www.youtube.com/watch?v=af4W9Q4vB1s)
+Refazendo o desafio backend da Magalu, feito pelo Bruno e apresentado no canal da [Build & Run](https://www.youtube.com/@buildrun-tech?sub_confirmation=1)
 
 ## Desafio
-- Confira o enunciado completo, [clicando aqui](./problem.md).
-
-## Como interagir com o banco de dados?
-- Utilizamos o [Beekeeper Community](https://github.com/beekeeper-studio/beekeeper-studio/releases/tag/v4.1.13)
-
-## Como interagir com a API?
-- Utilizamos o [Bruno](https://github.com/usebruno/bruno)
+- Confira o enunciado completo, [clicando aqui](./PROBLEM.md).
 
 ## :rocket: Tecnologias utilizadas
 
@@ -35,9 +27,4 @@ Para um maior entendimento do código deste repositório, [assista nosso vídeo 
 * Spring Data JPA
 * Spring Scheduler
 * Docker
-
-:mag: Baixe o projeto e teste você mesmo na prática.
-
-[Conheça mais sobre o nosso trabalho 😀](https://www.instagram.com/buildrun.tech/)
-
-Developed by Build & Run
+* MySQL
