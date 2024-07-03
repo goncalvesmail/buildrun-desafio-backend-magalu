@@ -1,39 +1,38 @@
 package tech.buildrun.magalums.controller;
 
-import org.apache.coyote.Response;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import tech.buildrun.magalums.controller.dto.ScheduleNotificationDto;
+import tech.buildrun.magalums.controller.dto.ScheduleNotificationRequest;
+import tech.buildrun.magalums.controller.dto.ScheduleNotificationResponse;
 import tech.buildrun.magalums.entity.Notification;
 import tech.buildrun.magalums.service.NotificationService;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/notifications")
 public class NotificationController {
-
     private final NotificationService notificationService;
 
     public NotificationController(NotificationService notificationService) {
         this.notificationService = notificationService;
     }
 
-    @PostMapping
-    public ResponseEntity<Void> scheduleNotification(@RequestBody ScheduleNotificationDto dto) {
-        notificationService.scheduleNotification(dto);
+    @GetMapping
+    public ResponseEntity<List<ScheduleNotificationResponse>> getNotifications() {
+        return ResponseEntity.ok(notificationService.findAll());
+    }
 
+    @PostMapping
+    public ResponseEntity<Void> scheduleNotification(@RequestBody ScheduleNotificationRequest dto) {
+        notificationService.scheduleNotification(dto);
         return ResponseEntity.accepted().build();
     }
 
     @GetMapping("/{notificationId}")
     public ResponseEntity<Notification> getNotification(@PathVariable("notificationId") Long notificationId) {
-
         var notification = notificationService.findById(notificationId);
-
-        if (notification.isEmpty()) {
-            return ResponseEntity.notFound().build();
-        }
-
-        return ResponseEntity.ok(notification.get());
+        return notification.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
     @DeleteMapping("/{notificationId}")

@@ -1,9 +1,13 @@
 package tech.buildrun.magalums.entity;
 
 import jakarta.persistence.*;
+import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.time.LocalDateTime;
 
+@Getter
 @Entity
 @Table(name = "tb_notifications")
 public class Notification {
@@ -11,77 +15,40 @@ public class Notification {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long notificationId;
-
+    @Setter
     private LocalDateTime dateTime;
-
+    @Setter
     private String destination;
-
+    @Setter
     private String message;
-
-    @ManyToOne
-    @JoinColumn(name = "channel_id")
-    private Channel channel;
-
-    @ManyToOne
-    @JoinColumn(name = "status_id")
-    private Status status;
-
+    @Setter
+    private ChannelType channel;
+    private StatusType status;
     public Notification() {
     }
 
-    public Notification(LocalDateTime dateTime, String destination, String message, Channel channel, Status status) {
+    public Notification(
+            LocalDateTime dateTime,
+            String destination, String message, ChannelType channel) {
         this.dateTime = dateTime;
         this.destination = destination;
         this.message = message;
         this.channel = channel;
-        this.status = status;
+        this.status = StatusType.PENDING;
     }
 
-    public Long getNotificationId() {
-        return notificationId;
+    @Transient
+    public void cancel() {
+        this.status = StatusType.CANCELED;
     }
 
-    public void setNotificationId(Long notificationId) {
-        this.notificationId = notificationId;
+    @Transient
+    public void send() {
+        this.status = StatusType.SUCCESS;
     }
 
-    public LocalDateTime getDateTime() {
-        return dateTime;
-    }
-
-    public void setDateTime(LocalDateTime dateTime) {
-        this.dateTime = dateTime;
-    }
-
-    public String getDestination() {
-        return destination;
-    }
-
-    public void setDestination(String destination) {
-        this.destination = destination;
-    }
-
-    public String getMessage() {
-        return message;
-    }
-
-    public void setMessage(String message) {
-        this.message = message;
-    }
-
-    public Channel getChannel() {
-        return channel;
-    }
-
-    public void setChannel(Channel channel) {
-        this.channel = channel;
-    }
-
-    public Status getStatus() {
-        return status;
-    }
-
-    public void setStatus(Status status) {
-        this.status = status;
+    @Transient
+    public void errorSending() {
+        this.status = StatusType.ERROR;
     }
 }
