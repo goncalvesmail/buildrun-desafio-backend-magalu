@@ -14,13 +14,4 @@ public enum StatusType {
     StatusType(String description) {
             this.description = description;
     }
-
-    public static StatusType fromDescription(String description) {
-        for (StatusType statusType : StatusType.values()) {
-            if (statusType.getDescription().equals(description)) {
-                return statusType;
-            }
-        }
-        return null;
-    }
 }

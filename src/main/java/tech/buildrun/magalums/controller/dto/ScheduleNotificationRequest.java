@@ -18,13 +18,4 @@ public record ScheduleNotificationRequest(LocalDateTime dateTime,
             ChannelType.fromDescription(channel)
         );
     }
-
-    public static Object fromNotification(Notification notification) {
-        return new ScheduleNotificationRequest(
-            notification.getDateTime(),
-            notification.getDestination(),
-            notification.getMessage(),
-            notification.getChannel().getDescription()
-        );
-    }
 }
